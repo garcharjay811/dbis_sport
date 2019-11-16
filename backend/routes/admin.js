@@ -37,6 +37,7 @@ router.post("/PopulateGroup", AdminController.addGroupAndPopulate);
 
 router.post("/updateTeamMatch/:match_id", AdminController.updateTeamMatch);
 router.get("/getTeamMatches", AdminController.getTeamMatches);
+router.get("/getNumberOfTeamMatches", AdminController.getNumberOfTeamMatches);
 
 
 module.exports = router;

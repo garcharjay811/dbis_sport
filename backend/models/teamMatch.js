@@ -84,6 +84,6 @@ const TeamMatch = sequelize.define('TeamMatch', {
     },
 });
 
-TeamMatch.sync({ force: true })
+//TeamMatch.sync({ force: true })
 
 module.exports = TeamMatch
