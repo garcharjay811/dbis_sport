@@ -623,6 +623,7 @@ exports.createGroup = (req, res, next) => {
         })
       })
     }).then(addMatches => {
+      console.log("Cool");
       for (i = 0; i < institutes.length; i++) {
         for (j = i+1; j < institutes.length; j++) {
           console.log(institutes[i])
@@ -640,6 +641,7 @@ exports.createGroup = (req, res, next) => {
         message: "Created Group and Added Matches",
       });
     }).catch(error => {
+      console.log(error);
       res.status(500).json({
         message: "Creating Group and Matches failed!"});
     });
@@ -686,3 +688,21 @@ exports.createGroup = (req, res, next) => {
         });
       });
   };
+
+
+  exports.getNumberOfTeamMatches = (req,res,next) => {
+    console.log(TeamMatch.findAndCountAll());
+    TeamMatch.findAndCountAll()
+    .then(requests => {
+      console.log(requests);
+      res.status(200).json({
+        message: "Number of Team Matches fetched successfully!",
+        value: requests,
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching Number of Team Matches failed!"
+      });
+    });
+  }

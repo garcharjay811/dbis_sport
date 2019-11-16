@@ -1,14 +1,18 @@
-:host {
-  display: block;
-  margin-top: 1rem;
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+.full {
+  height: 100%;
+  width: 100%;
 }
 
 mat-spinner {
   margin: auto;
 }
 
-mat-paginator {
-  margin-top: 1rem;
+.HEAD {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  margin-top: 50%;
 }
 
 .info-text {

@@ -46,9 +46,13 @@ export class AdminDashboardService {
     return this.http.get(BACKEND_URL + '/getTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
   }
 
+  getAllTeamMatches(){
+    return this.http.get(BACKEND_URL + '/getNumberOfTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
+  }
+
   updateTeamMatches(referee_id: Number, venue_name: string, winner: string, date: string, match_id: Number,
                     institute1: string, institute2: string, sport_name: string, group_name: string) {
-    console.log("banchod");
+                      console.log(venue_name);
     this.http
       .post<{ message: string; updateTeamMatches: TeamMatch }>(
         BACKEND_URL + '/updateTeamMatch/' + match_id,
@@ -71,6 +75,7 @@ export class AdminDashboardService {
   }
 
   populateGroup(inst_name: Array<string>, sport_name: string, group_name: string){
+    console.log("HI");
     this.http
       .post<{ message: string; addGroupAndPopulateGroup: Populate }>(
         BACKEND_URL + '/PopulateGroup',

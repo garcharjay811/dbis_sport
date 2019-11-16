@@ -31,8 +31,12 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
     TeamMatch_form: FormGroup;
     allTeamMatches: TeamMatch[] = []
     TeamMatchData: TeamMatch[] = [];
+    AllTeamMatchFromGroups: FormGroup[] = [];
     i=0;
+    j=0;
+    answer: Number[] = [];
     Winners : Array<String[]> = [];
+  numbers: number[]
   
       constructor(
           public route: ActivatedRoute,
@@ -206,18 +210,73 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
               this.i = this.i + 1;
             })
 
+            this.adminDashbaordService.getAllTeamMatches().subscribe(result => {
+              console.log(result.value.count);
+              for(this.i = 0; this.i < result.value.count; this.i = this.i + 1){
+                this.answer[this.i] = this.i;
+              }
+              this.fillArrayForFormGroups(result.value.count);
+            })
+
             this.TeamMatch_form.setValue({
                 institute1: this.TeamMatchData[0] ? this.TeamMatchData[0].institute1 : null,
-                institute2: this.TeamMatchData[0]  ? this.TeamMatchData[0].institute2 : null,
-                sport_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].sport_name : null,
-                group_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].group_name : null,
-                venue_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].venue_name : null,
-                date: this.TeamMatchData[0]  ? this.TeamMatchData[0].date : null,
-                referee_id: this.TeamMatchData[0]  ? this.TeamMatchData[0].referee_id : null,
-                winner: this.TeamMatchData[0]  ? this.TeamMatchData[0].winner : null
+                institute2: this.TeamMatchData[0] ? this.TeamMatchData[0].institute2 : null,
+                sport_name: this.TeamMatchData[0] ? this.TeamMatchData[0].sport_name : null,
+                group_name: this.TeamMatchData[0] ? this.TeamMatchData[0].group_name : null,
+                venue_name: this.TeamMatchData[0] ? this.TeamMatchData[0].venue_name : null,
+                date: this.TeamMatchData[0] ? this.TeamMatchData[0].date : null,
+                referee_id: this.TeamMatchData[0] ? this.TeamMatchData[0].referee_id : null,
+                winner: this.TeamMatchData[0] ? this.TeamMatchData[0].winner : null
               })
           })
 
+        }
+
+
+        fillArrayForFormGroups(k: number) {
+          console.log("cool");
+          for( this.j = 0; this.j < k; this.j = this.j+1){
+            this.AllTeamMatchFromGroups[this.j] = this.createTeamMatchForm(this.j);
+            this.AllTeamMatchFromGroups[this.j].setValue({
+              institute1: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].institute1 : null,
+              institute2: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].institute2 : null,
+              sport_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].sport_name : null,
+              group_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].group_name : null,
+              venue_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].venue_name : null,
+              date: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].date : null,
+              referee_id: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].referee_id : null,
+              winner: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].winner : null
+            })
+          }
+        }
+
+        createTeamMatchForm(k: number): FormGroup {
+          return this.formBuilder.group({
+            institute1: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            institute2: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            sport_name: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            group_name: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            venue_name: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            date: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            referee_id: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            winner: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            })
+          })
         }
 
         createInstituteField(): FormGroup {
@@ -312,11 +371,15 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
 
       onUpdateMatch(index) {
         console.log("HI");
+        this.TeamMatchData[index].referee_id = this.AllTeamMatchFromGroups[index].value.referee_id,
+          this.TeamMatchData[index].venue_name = this.AllTeamMatchFromGroups[index].value.venue_name,
+          this.TeamMatchData[index].winner = this.AllTeamMatchFromGroups[index].value.winner,
+          this.TeamMatchData[index].date = this.AllTeamMatchFromGroups[index].value.date,
         this.adminDashbaordService.updateTeamMatches(
-          this.TeamMatchData[index].referee_id = this.TeamMatch_form.value.referee_id,
-          this.TeamMatchData[index].venue_name = this.TeamMatch_form.value.venue_name,
-          this.TeamMatchData[index].date = this.TeamMatch_form.value.date,
-          this.TeamMatchData[index].winner = this.TeamMatch_form.value.winner,
+          this.TeamMatchData[index].referee_id,
+          this.TeamMatchData[index].venue_name,
+          this.TeamMatchData[index].winner,
+          this.TeamMatchData[index].date.toString(),
           this.TeamMatchData[index].match_id,
           this.TeamMatchData[index].institute1,
           this.TeamMatchData[index].institute2,
@@ -324,6 +387,53 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
           this.TeamMatchData[index].group_name,
         )
         this.TeamMatch_form.reset();
+      }
+
+      onAddReferee(){
+        if(this.referee_form.invalid){
+          return
+        }
+        this.adminDashbaordService.addReferee(
+          this.referee_form.value.referee_name,
+          this.referee_form.value.sport_name,
+          this.referee_form.value.phone
+        );
+        this.referee_form.reset();
+      }
+
+      onAddParticipant(){
+        if(this.participant_form.invalid){
+          return
+        }
+        this.adminDashbaordService.addParticipant(
+          this.participant_form.value.roll_id,
+          this.participant_form.value.name,
+          this.participant_form.value.inst_name,
+          this.participant_form.value.sport_name,
+          this.participant_form.value.phone
+        );
+      }
+
+      onAddSport() {
+        if(this.sport_form.invalid){
+          return
+        }
+        this.adminDashbaordService.addSport(
+          this.sport_form.value.sport_name,
+          this.sport_form.value.sport_type
+        );
+        this.sport_form.reset();
+      }
+
+      onAddVenue() {
+        if(this.venue_form.invalid){
+          return
+        }
+        this.adminDashbaordService.addVenue(
+          this.venue_form.value.venue_name,
+          this.venue_form.value.address
+        );
+        this.venue_form.reset();
       }
 
         ngOnDestroy() {

@@ -15,6 +15,10 @@ import { FooterComponent } from './footer/footer.component'
 import { adminDashboardComponent } from "./dashboard/adminDashboard.component";
 import { MatSelectModule, MatOptionModule } from '@angular/material'
 import { ReactiveFormsModule } from '@angular/forms'
+import { ProjectRequestListComponent } from './projectRequests/projectRequest-list/projectRequest-list.component'
+import { ProjectRequestCreateComponent } from './projectRequests/projectRequest-create/projectRequest-create.component'
+import { MatchListComponent } from './MatchList/matchList.component'
+
 
 
 @NgModule({
@@ -24,7 +28,10 @@ import { ReactiveFormsModule } from '@angular/forms'
     ErrorComponent,
     AboutComponent,
     FooterComponent,
-    adminDashboardComponent
+    adminDashboardComponent,
+    ProjectRequestListComponent,
+    ProjectRequestCreateComponent,
+    MatchListComponent
   ],
   imports: [
     BrowserModule,
