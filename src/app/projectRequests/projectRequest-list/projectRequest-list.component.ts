@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs'
 import { ProjectRequest } from '../projectRequest.model'
 import { ProjectRequestsService } from '../projectRequests.service'
 import { AuthService } from '../../auth/auth.service'
+import { AdminDashboardService } from 'src/app/dashboard/adminDashboard.service'
 
 @Component({
   selector: 'app-project-request-list',
@@ -26,7 +27,8 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
 
   constructor(
     public projectRequestsService: ProjectRequestsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private adminDashboardService: AdminDashboardService
   ) {}
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
     } else {
       this.isLoading = false
     }
+
   }
 
   // onChangedPage(pageData: PageEvent) {

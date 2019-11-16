@@ -174,24 +174,6 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
 
           // Get Team Matches
           this.adminDashbaordService.getTeamMatches().subscribe(teamMatchData => {
-            // this.TeamMatchData = {
-            //   institute1: teamMatchData.institute1,
-            //   institute2: teamMatchData.institute2,
-            //   sport_name: teamMatchData.sport_name,
-            //   group_name: teamMatchData.group_name,
-            //   venue_name: teamMatchData.venue_name,
-            //   date: teamMatchData.date,
-            //   referee_id: teamMatchData.referee_id,
-            //   winner: teamMatchData.winner
-            // };
-
-            // this.TeamMatch_form.setValue({
-            //   institute1: teamMatchData.institute1,
-            //   institute2: teamMatchData.institute2,
-            //   sport_name: teamMatchData.sport_name,
-            //   group_name: teamMatchData.group_name
-            // })
-
             teamMatchData.TeamMatches.map(Match => {
               console.log(Match)
               this.TeamMatchData[this.i] = {
@@ -387,53 +369,6 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
           this.TeamMatchData[index].group_name,
         )
         this.TeamMatch_form.reset();
-      }
-
-      onAddReferee(){
-        if(this.referee_form.invalid){
-          return
-        }
-        this.adminDashbaordService.addReferee(
-          this.referee_form.value.referee_name,
-          this.referee_form.value.sport_name,
-          this.referee_form.value.phone
-        );
-        this.referee_form.reset();
-      }
-
-      onAddParticipant(){
-        if(this.participant_form.invalid){
-          return
-        }
-        this.adminDashbaordService.addParticipant(
-          this.participant_form.value.roll_id,
-          this.participant_form.value.name,
-          this.participant_form.value.inst_name,
-          this.participant_form.value.sport_name,
-          this.participant_form.value.phone
-        );
-      }
-
-      onAddSport() {
-        if(this.sport_form.invalid){
-          return
-        }
-        this.adminDashbaordService.addSport(
-          this.sport_form.value.sport_name,
-          this.sport_form.value.sport_type
-        );
-        this.sport_form.reset();
-      }
-
-      onAddVenue() {
-        if(this.venue_form.invalid){
-          return
-        }
-        this.adminDashbaordService.addVenue(
-          this.venue_form.value.venue_name,
-          this.venue_form.value.address
-        );
-        this.venue_form.reset();
       }
 
         ngOnDestroy() {

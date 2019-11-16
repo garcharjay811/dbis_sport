@@ -54,33 +54,9 @@
                             <textarea matInput type="text" formControlName="address" placeholder="Address"></textarea>
                             </mat-form-field>
                         
-<<<<<<< HEAD
-                        <mat-form-field>
-                        <input matInput type="text" formControlName="sport_type" placeholder="Individual/Team">
-                        </mat-form-field>
-                        <button mat-raised-button color="accent" type="submit">Add Sport</button>
-                    </form>
-                    </mat-expansion-panel>
-                </mat-accordion>
-        </div>
-        <div class="col-lg-4 col-xs-4 col-sm-4">
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Add Institute
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                
-                    <form [formGroup]="inst_form" (submit)="onAddInstitute()" *ngIf="!isLoading">
-                        <mat-form-field>
-                        <input matInput type="text" formControlName="inst_name" placeholder="Name of the Institute">
-                        </mat-form-field>
-=======
                             <mat-form-field>
                             <input matInput type="text" formControlName="so_name" placeholder="Name of the Sports Officer">
                             </mat-form-field>
->>>>>>> 061323bc8f2352b1f77b81d9961243c6acf6158a
                         
                             <mat-form-field>
                             <input matInput type="number" formControlName="phone" placeholder="Phone Number of Sports Officer">
@@ -135,17 +111,11 @@
                             </mat-accordion>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="col-lg-4 col-lxs-4 col-sm-4">
-                <mat-accordion>
-                        <mat-expansion-panel>
-=======
         <br>
         <div class="row">
                 <div class="col-lg-4 col-xs-4 col-sm-4">
                         <mat-accordion>
                             <mat-expansion-panel>
->>>>>>> 061323bc8f2352b1f77b81d9961243c6acf6158a
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
                                     Add and Populate Group
@@ -202,80 +172,6 @@
                             </form>
                             </mat-expansion-panel>
                         </mat-accordion>
-<<<<<<< HEAD
-        </div>
-    </div>
-    <br>
-    <div class="row">
-            <div class="col-lg-4 col-xs-4 col-sm-4">
-                    <mat-accordion>
-                        <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                Add and Populate Group
-                            </mat-panel-title>
-                            <!-- <mat-panel-description>
-                                Add a new Group for a particular sport
-                            </mat-panel-description> -->
-                        </mat-expansion-panel-header>
-                    
-                        <form [formGroup]="form" (submit)="onAddGroupAndPopulate()" *ngIf="!isLoading">
-                            <!-- <mat-form-field>
-                            <input matInput type="text" formControlName="group_name" placeholder="Name of Group">
-                            </mat-form-field> -->
-    
-                            <mat-form-field>
-                                <mat-label>Group Name</mat-label>
-                                <mat-select formControlName="group_name">
-                                    <mat-option *ngFor="let group of allGroups" [value]="group">
-                                    {{ group }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            
-                            <mat-form-field>
-                                <mat-label>Sport Name</mat-label>
-                                <mat-select formControlName="sport_name">
-                                    <mat-option *ngFor="let sport of allSports" [value]="sport.sport_name">
-                                    {{ sport.sport_name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                    
-                            <div style="width: 100%;" formArrayName="instituteControl" *ngFor="let item of form.get('instituteControl').controls; let i = index;">  
-                                <div [formGroupName]="i">
-                                    <mat-form-field style="width: 40%;">
-                                    <mat-label translate>Institute Name</mat-label>
-                                    <mat-select formControlName="institute" matNativeControl required>
-                                        <mat-option *ngFor="let institute of allInstitutes" value="{{institute.inst_name}}">{{ institute.inst_name }}</mat-option>
-                                    </mat-select>
-                                    </mat-form-field>
-                    
-                                    <div hidden *ngIf = "i===0; then thenBlock else elseBlock"></div>
-                                    <ng-template #thenBlock>
-                                        <button style="margin-left: 40px;" mat-raised-button type="button" hidden disabled>Remove Institute</button>
-                                    </ng-template>
-                                    <ng-template #elseBlock>
-                                        <button style="margin-left: 40px;" mat-raised-button type="button" (click)="removeInstitute(i)">Remove Institute</button>
-                                    </ng-template>
-                                </div>
-                            </div>
-                            <button mat-raised-button type="button" (click)="addInstitute()">Add Institute</button>      
-                            <br> <br>
-                            <button mat-raised-button color="accent" type="submit">Add Group</button>
-                        </form>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-            </div>
-        <div class="col-lg-4 col-sm-4 col-xs-4">
-            <mat-accordion>
-                <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Add Referee
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-=======
                 </div>
             <div class="col-lg-4 col-sm-4 col-xs-4">
                 <mat-accordion>
@@ -341,7 +237,6 @@
     
     <div>
         <h3 class="text_2">Matches</h3>
->>>>>>> 061323bc8f2352b1f77b81d9961243c6acf6158a
             
             <div class="container">
                 <div class="row justify-content-center">
@@ -410,73 +305,45 @@
                                     
                                         </mat-expansion-panel>
                                     </mat-accordion>
-                                    <br>
+                        <br>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-sm-4 col-xs-4">
-            <mat-accordion>
-                <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Add Venue
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                    <form [formGroup]="venue_form" (submit)="onAddVenue()" *ngIf="!isLoading">
-                        <mat-form-field>
-                        <input matInput type="text" formControlName="venue_name" placeholder="Venue Name">
-                        <!-- <mat-error *ngIf="form.get('name').invalid">Please enter name of the Venue.</mat-error> -->
-                        </mat-form-field>
-                        
-                        <mat-form-field>
-                        <textarea matInput type="text" formControlName="address" placeholder="Address"></textarea>
-                        <!-- <mat-error *ngIf="form.get('address').invalid">Please enter address of the Venue.</mat-error> -->
-                        </mat-form-field>
-                        <button mat-raised-button color="accent" type="submit">Add Venue</button>
-                    </form>
-                </mat-expansion-panel>
-            </mat-accordion>
         </div>
     </div>
     <br>
     <br>
 
 
-    <footer class="ftco-footer ftco-footer-2 ftco-section">
-            <div class="container">
-              <div class="row mb-5">
-                <div class="col-md">
-                  <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Sporty</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-                      <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                      <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                      <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md">
-                  <div class="ftco-footer-widget mb-4">
-                      <h2 class="ftco-heading-2">Have a Questions?</h2>
-                      <div class="block-23 mb-3">
-                        <ul>
-                          <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                          <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                          <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
+
+<footer class="ftco-footer ftco-footer-2 ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Sporty</h2>
+            <p>Sporty is a Sports Event Mangaement System made as a part of CS313 Course Project. </p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Contact Us</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text">Belur, IIT Dharwad, Nr. High Court, Dharwad, Karnataka</span></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 6969696969</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">iit@dharwad.com</span></a></li>
+                </ul>
               </div>
-              <div class="row">
-                <div class="col-md-12 text-center">
-      
-                  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                </div>
-              </div>
-            </div>
-          </footer>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+  </footer>

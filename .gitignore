@@ -1,1 +1,3 @@
 node_modules
+environments/environment.ts
+backend/db.js

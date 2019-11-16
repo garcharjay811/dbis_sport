@@ -3,7 +3,7 @@
  	easing: 'slide'
  });
 
-(function($) {
+ jQuery( document ).ready(function($) {
 
 	"use strict";
 
@@ -357,5 +357,5 @@ setInterval(function() { makeTimer(); }, 1000);
 
 
 
-})(jQuery);
+});
 

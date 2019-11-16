@@ -31,9 +31,18 @@
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a routerLink="/matches" class="nav-link">Matches</a></li>
           <li class="nav-item"><a routerLink="/sports" class="nav-link">Sports</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a routerLink="/auth/login" class="nav-link">Login</a></li>
-          <li class="nav-item cta"><a href="#" class="nav-link">Buy Ticket</a></li>
+          <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li> -->
+          <!-- <li class="nav-item cta"><a routerLink="/auth/login" class="nav-link">Login</a></li> -->
+          <li *ngIf="!userIsAuthenticated" class="nav-item">
+            <a routerLink="/auth/login" routerLinkActive="mat-accent" class="nav-link">Login</a>
+          </li>
+          <li *ngIf="userIsAuthenticated" class="nav-item">
+            <a routerLink="/dashboard"  routerLinkActive="mat-accent" class="nav-link">Admin Panel</a>
+          </li>
+          <li *ngIf="userIsAuthenticated" class="nav-item" style="cursor: pointer; ">
+            <a (click)="onLogout()"  class="nav-link">Logout</a>
+          </li>
+          <!-- <li class="nav-item cta"><a href="#" class="nav-link">Buy Ticket</a></li> -->
 
         </ul>
       </div>

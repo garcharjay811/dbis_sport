@@ -14,7 +14,7 @@ mat-spinner {
 }
 
 .background{
-  background-image: url(../../assets/template/images/admin_2.jpg);
+  background-image: url(../../assets/template/images/adminDashboard.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 61rem;
@@ -22,11 +22,12 @@ mat-spinner {
 }
 
 .HEAD {
-  margin-top: 20%;
+  margin-top: 17%;
   margin-bottom: 5%;
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Helvitica bold', Helvetica, sans-serif;
   font-size: 5rem;
+  color: white;
 }
 
 .text_2 {
