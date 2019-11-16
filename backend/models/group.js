@@ -26,6 +26,6 @@ const Group = sequelize.define('Group', {
     },
 });
 
-//Group.sync({ force: true })
+// Group.sync({ force: true })
 
 module.exports = Group

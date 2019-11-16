@@ -27,6 +27,7 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
     form: FormGroup;
     referee_form: FormGroup;
     inst_form: FormGroup;
+    venue_form: FormGroup;
     TeamMatch_form: FormGroup;
     allTeamMatches: TeamMatch[] = []
     TeamMatchData: TeamMatch[] = [];
@@ -158,6 +159,15 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
             })
           })
 
+          this.venue_form = new FormGroup({
+            venue_name: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            }),
+            address: new FormControl(null, {
+              validators: [Validators.required, Validators.minLength(3)]
+            })
+          })
+
           // Get Team Matches
           this.adminDashbaordService.getTeamMatches().subscribe(teamMatchData => {
             // this.TeamMatchData = {
@@ -198,13 +208,13 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
 
             this.TeamMatch_form.setValue({
                 institute1: this.TeamMatchData[0] ? this.TeamMatchData[0].institute1 : null,
-                institute2: this.TeamMatchData[0].institute2  ? this.TeamMatchData[0].institute2 : null,
-                sport_name: this.TeamMatchData[0].sport_name  ? this.TeamMatchData[0].sport_name : null,
-                group_name: this.TeamMatchData[0].group_name  ? this.TeamMatchData[0].group_name : null,
-                venue_name: this.TeamMatchData[0].venue_name  ? this.TeamMatchData[0].venue_name : null,
-                date: this.TeamMatchData[0].date  ? this.TeamMatchData[0].date : null,
-                referee_id: this.TeamMatchData[0].referee_id  ? this.TeamMatchData[0].referee_id : null,
-                winner: this.TeamMatchData[0].winner  ? this.TeamMatchData[0].winner : null
+                institute2: this.TeamMatchData[0]  ? this.TeamMatchData[0].institute2 : null,
+                sport_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].sport_name : null,
+                group_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].group_name : null,
+                venue_name: this.TeamMatchData[0]  ? this.TeamMatchData[0].venue_name : null,
+                date: this.TeamMatchData[0]  ? this.TeamMatchData[0].date : null,
+                referee_id: this.TeamMatchData[0]  ? this.TeamMatchData[0].referee_id : null,
+                winner: this.TeamMatchData[0]  ? this.TeamMatchData[0].winner : null
               })
           })
 
@@ -243,7 +253,6 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
           if (this.inst_form.invalid) {
               return
           }
-          this.isLoading = true;
         this.adminDashbaordService.addInstituteAndSO(
           this.inst_form.value.inst_name,
           this.inst_form.value.address,
@@ -251,6 +260,54 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
           this.inst_form.value.phone
         );
           this.inst_form.reset();
+      }
+
+      onAddVenue(){
+        if(this.venue_form.invalid){
+          return
+        }
+        this.adminDashbaordService.addVenue(
+          this.venue_form.value.venue_name,
+          this.venue_form.value.address
+        );
+        this.venue_form.reset();
+      }
+
+      onAddSport() {
+        if (this.sport_form.invalid) {
+          return
+        }
+        this.adminDashbaordService.addSport(
+          this.sport_form.value.sport_name,
+          this.sport_form.value.sport_type
+        );
+        this.sport_form.reset();
+      }
+
+      onAddReferee() {
+        if (this.referee_form.invalid) {
+          return
+        }
+        this.adminDashbaordService.addReferee(
+          this.referee_form.value.referee_name,
+          this.referee_form.value.sport_name,
+          this.referee_form.value.phone
+        );
+        this.referee_form.reset();
+      }
+
+      onAddParticipant() {
+        if (this.participant_form.invalid) {
+          return
+        }
+        this.adminDashbaordService.addParticipant(
+          this.participant_form.value.roll_id,
+          this.participant_form.value.name,
+          this.participant_form.value.inst_name,
+          this.participant_form.value.sport_name,
+          this.participant_form.value.phone
+        );
+        this.participant_form.reset();
       }
 
       onUpdateMatch(index) {

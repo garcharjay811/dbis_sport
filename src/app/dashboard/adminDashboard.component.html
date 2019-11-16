@@ -1,25 +1,7 @@
-<mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <a mat-button [routerLink]="['/dashboard1/addReferee']" routerLinkActive="mat-accent">Add Referee</a>
-    <!-- <form [formGroup]="addReferee" (submit)="onCreateReferee()" *ngIf="!isLoading">
-        <button mat-raised-button color="accent" type="submit">Add Referee</button>
-    </form> -->
-</mat-card>
-
-<mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <a mat-button [routerLink]="['/dashboard1/addVenue']" routerLinkActive="mat-accent">Add Venue</a>
-    <!-- <form [formGroup]="addVenue" (submit)="onCreateVenue()" *ngIf="!isLoading">
-        <button mat-raised-button color="accent" type="submit">Add Venue</button>
-    </form> -->
-</mat-card>
-
 <br>
-<br>
-
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-3">
+        <div class="col-lg-4 col-sm-4 col-xs-4">
                 <mat-accordion>
                     <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -41,7 +23,7 @@
                     </mat-expansion-panel>
                 </mat-accordion>
         </div>
-        <div class="col-lg-3 col-xs-3 col-sm-3">
+        <div class="col-lg-4 col-xs-4 col-sm-4">
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -71,7 +53,7 @@
                     </mat-expansion-panel>
                 </mat-accordion>
         </div>
-        <div class="col-lg-3 col-lxs-3 col-sm-3">
+        <div class="col-lg-4 col-lxs-4 col-sm-4">
                 <mat-accordion>
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
@@ -115,70 +97,70 @@
                             </mat-expansion-panel>
                         </mat-accordion>
         </div>
-        <div class="col-lg-3 col-xs-3 col-sm-3">
-                <mat-accordion>
-                    <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Add and Populate Group
-                        </mat-panel-title>
-                        <!-- <mat-panel-description>
-                            Add a new Group for a particular sport
-                        </mat-panel-description> -->
-                    </mat-expansion-panel-header>
-                
-                    <form [formGroup]="form" (submit)="onAddGroupAndPopulate()" *ngIf="!isLoading">
-                        <!-- <mat-form-field>
-                        <input matInput type="text" formControlName="group_name" placeholder="Name of Group">
-                        </mat-form-field> -->
-
-                        <mat-form-field>
-                            <mat-label>Group Name</mat-label>
-                            <mat-select formControlName="group_name">
-                                <mat-option *ngFor="let group of allGroups" [value]="group">
-                                {{ group }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        
-                        <mat-form-field>
-                            <mat-label>Sport Name</mat-label>
-                            <mat-select formControlName="sport_name">
-                                <mat-option *ngFor="let sport of allSports" [value]="sport.sport_name">
-                                {{ sport.sport_name }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                
-                        <div style="width: 100%;" formArrayName="instituteControl" *ngFor="let item of form.get('instituteControl').controls; let i = index;">  
-                            <div [formGroupName]="i">
-                                <mat-form-field style="width: 40%;">
-                                <mat-label translate>Institute Name</mat-label>
-                                <mat-select formControlName="institute" matNativeControl required>
-                                    <mat-option *ngFor="let institute of allInstitutes" value="{{institute.inst_name}}">{{ institute.inst_name }}</mat-option>
-                                </mat-select>
-                                </mat-form-field>
-                
-                                <div hidden *ngIf = "i===0; then thenBlock else elseBlock"></div>
-                                <ng-template #thenBlock>
-                                    <button style="margin-left: 40px;" mat-raised-button type="button" hidden disabled>Remove Institute</button>
-                                </ng-template>
-                                <ng-template #elseBlock>
-                                    <button style="margin-left: 40px;" mat-raised-button type="button" (click)="removeInstitute(i)">Remove Institute</button>
-                                </ng-template>
-                            </div>
-                        </div>
-                        <button mat-raised-button type="button" (click)="addInstitute()">Add Institute</button>      
-                        <br> <br>
-                        <button mat-raised-button color="accent" type="submit">Add Group</button>
-                    </form>
-                    </mat-expansion-panel>
-                </mat-accordion>
-        </div>
     </div>
     <br>
     <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-3">
+            <div class="col-lg-4 col-xs-4 col-sm-4">
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Add and Populate Group
+                            </mat-panel-title>
+                            <!-- <mat-panel-description>
+                                Add a new Group for a particular sport
+                            </mat-panel-description> -->
+                        </mat-expansion-panel-header>
+                    
+                        <form [formGroup]="form" (submit)="onAddGroupAndPopulate()" *ngIf="!isLoading">
+                            <!-- <mat-form-field>
+                            <input matInput type="text" formControlName="group_name" placeholder="Name of Group">
+                            </mat-form-field> -->
+    
+                            <mat-form-field>
+                                <mat-label>Group Name</mat-label>
+                                <mat-select formControlName="group_name">
+                                    <mat-option *ngFor="let group of allGroups" [value]="group">
+                                    {{ group }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                <mat-label>Sport Name</mat-label>
+                                <mat-select formControlName="sport_name">
+                                    <mat-option *ngFor="let sport of allSports" [value]="sport.sport_name">
+                                    {{ sport.sport_name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    
+                            <div style="width: 100%;" formArrayName="instituteControl" *ngFor="let item of form.get('instituteControl').controls; let i = index;">  
+                                <div [formGroupName]="i">
+                                    <mat-form-field style="width: 40%;">
+                                    <mat-label translate>Institute Name</mat-label>
+                                    <mat-select formControlName="institute" matNativeControl required>
+                                        <mat-option *ngFor="let institute of allInstitutes" value="{{institute.inst_name}}">{{ institute.inst_name }}</mat-option>
+                                    </mat-select>
+                                    </mat-form-field>
+                    
+                                    <div hidden *ngIf = "i===0; then thenBlock else elseBlock"></div>
+                                    <ng-template #thenBlock>
+                                        <button style="margin-left: 40px;" mat-raised-button type="button" hidden disabled>Remove Institute</button>
+                                    </ng-template>
+                                    <ng-template #elseBlock>
+                                        <button style="margin-left: 40px;" mat-raised-button type="button" (click)="removeInstitute(i)">Remove Institute</button>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="button" (click)="addInstitute()">Add Institute</button>      
+                            <br> <br>
+                            <button mat-raised-button color="accent" type="submit">Add Group</button>
+                        </form>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+            </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4">
             <mat-accordion>
                 <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -207,6 +189,29 @@
                         <!-- <mat-error *ngIf="form.get('phone').invalid">Please enter Phone number of the Referee.</mat-error> -->
                         </mat-form-field>
                         <button mat-raised-button color="accent" type="submit">Add Referee</button>
+                    </form>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4">
+            <mat-accordion>
+                <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Add Venue
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                    <form [formGroup]="venue_form" (submit)="onAddVenue()" *ngIf="!isLoading">
+                        <mat-form-field>
+                        <input matInput type="text" formControlName="venue_name" placeholder="Venue Name">
+                        <!-- <mat-error *ngIf="form.get('name').invalid">Please enter name of the Venue.</mat-error> -->
+                        </mat-form-field>
+                        
+                        <mat-form-field>
+                        <textarea matInput type="text" formControlName="address" placeholder="Address"></textarea>
+                        <!-- <mat-error *ngIf="form.get('address').invalid">Please enter address of the Venue.</mat-error> -->
+                        </mat-form-field>
+                        <button mat-raised-button color="accent" type="submit">Add Venue</button>
                     </form>
                 </mat-expansion-panel>
             </mat-accordion>

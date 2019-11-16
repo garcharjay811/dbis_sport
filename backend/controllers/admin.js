@@ -127,13 +127,15 @@ exports.createInstituteAndSO = (req, res, next) => {
     Institute.create({
       inst_name: req.body.inst_name,
       address: req.body.address
-    }).then(
+    }).then( addInstituteAndSO => {
       SportsOfficer.create({
       so_id: req.body.so_id,
       so_name: req.body.so_name,
       inst_name : req.body.inst_name,
       phone: req.body.phone
-    })).then(createdInstituteAndSO => {
+      }
+    )
+    }).then(createdInstituteAndSO => {
         res.status(201).json({
           message: "Institute and Sports Officer added successfully",
           Institute: createdInstituteAndSO
