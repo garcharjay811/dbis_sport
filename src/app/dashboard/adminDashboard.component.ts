@@ -173,7 +173,7 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
           })
 
           // Get Team Matches
-          this.adminDashbaordService.getTeamMatches().subscribe(teamMatchData => {
+          this.adminDashbaordService.getNullTeamMatches().subscribe(teamMatchData => {
             teamMatchData.TeamMatches.map(Match => {
               console.log(Match)
               this.TeamMatchData[this.i] = {
@@ -192,24 +192,13 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
               this.i = this.i + 1;
             })
 
-            this.adminDashbaordService.getAllTeamMatches().subscribe(result => {
+            this.adminDashbaordService.getNumberOfNullTeamMatches().subscribe(result => {
               console.log(result.value.count);
               for(this.i = 0; this.i < result.value.count; this.i = this.i + 1){
                 this.answer[this.i] = this.i;
               }
               this.fillArrayForFormGroups(result.value.count);
             })
-
-            this.TeamMatch_form.setValue({
-                institute1: this.TeamMatchData[0] ? this.TeamMatchData[0].institute1 : null,
-                institute2: this.TeamMatchData[0] ? this.TeamMatchData[0].institute2 : null,
-                sport_name: this.TeamMatchData[0] ? this.TeamMatchData[0].sport_name : null,
-                group_name: this.TeamMatchData[0] ? this.TeamMatchData[0].group_name : null,
-                venue_name: this.TeamMatchData[0] ? this.TeamMatchData[0].venue_name : null,
-                date: this.TeamMatchData[0] ? this.TeamMatchData[0].date : null,
-                referee_id: this.TeamMatchData[0] ? this.TeamMatchData[0].referee_id : null,
-                winner: this.TeamMatchData[0] ? this.TeamMatchData[0].winner : null
-              })
           })
 
         }
@@ -218,17 +207,17 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
         fillArrayForFormGroups(k: number) {
           console.log("cool");
           for( this.j = 0; this.j < k; this.j = this.j+1){
-            this.AllTeamMatchFromGroups[this.j] = this.createTeamMatchForm(this.j);
-            this.AllTeamMatchFromGroups[this.j].setValue({
-              institute1: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].institute1 : null,
-              institute2: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].institute2 : null,
-              sport_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].sport_name : null,
-              group_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].group_name : null,
-              venue_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].venue_name : null,
-              date: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].date : null,
-              referee_id: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].referee_id : null,
-              winner: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].winner : null
-            })
+              this.AllTeamMatchFromGroups[this.j] = this.createTeamMatchForm(this.j);
+              this.AllTeamMatchFromGroups[this.j].setValue({
+                institute1: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].institute1 : null,
+                institute2: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].institute2 : null,
+                sport_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].sport_name : null,
+                group_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].group_name : null,
+                venue_name: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].venue_name : null,
+                date: this.TeamMatchData[this.j] ? this.TeamMatchData[this.j].date : null,
+                referee_id: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].referee_id : null,
+                winner: this.TeamMatchData[this.j]  ? this.TeamMatchData[this.j].winner : null
+              })
           }
         }
 
@@ -352,6 +341,7 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
       }
 
       onUpdateMatch(index) {
+        console.log(this.AllTeamMatchFromGroups[index]);
         console.log("index: " + index);
         console.log("venue_name: " + this.AllTeamMatchFromGroups[index].value.venue_name );
         this.TeamMatchData[index].referee_id = this.AllTeamMatchFromGroups[index].value.referee_id;
@@ -362,8 +352,8 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
         this.adminDashbaordService.updateTeamMatches(
           this.TeamMatchData[index].referee_id,
           this.TeamMatchData[index].venue_name,
-          this.TeamMatchData[index].winner.toString(),
-          this.TeamMatchData[index].date.toString(),
+          this.TeamMatchData[index].winner,
+          this.TeamMatchData[index].date,
           this.TeamMatchData[index].match_id,
           this.TeamMatchData[index].institute1,
           this.TeamMatchData[index].institute2,

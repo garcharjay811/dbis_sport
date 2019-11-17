@@ -6,6 +6,7 @@ import { ProjectRequest } from '../projectRequest.model'
 import { ProjectRequestsService } from '../projectRequests.service'
 import { AuthService } from '../../auth/auth.service'
 import { AdminDashboardService } from 'src/app/dashboard/adminDashboard.service'
+import { Sport, Institute} from 'src/app/dashboard/adminDashboard.model'
 
 @Component({
   selector: 'app-project-request-list',
@@ -15,6 +16,8 @@ import { AdminDashboardService } from 'src/app/dashboard/adminDashboard.service'
 export class ProjectRequestListComponent implements OnInit, OnDestroy {
   userType = 'customer'
   projectRequests: ProjectRequest[] = []
+  allInstitutes: Institute[] = []
+  allSports: Sport[] = [];
   isLoading = false
   totalProjectRequests = 0
   projectRequestsPerPage = 2
@@ -28,7 +31,7 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
   constructor(
     public projectRequestsService: ProjectRequestsService,
     private authService: AuthService,
-    private adminDashboardService: AdminDashboardService
+    private adminDashbaordService: AdminDashboardService
   ) {}
 
   ngOnInit() {
@@ -63,23 +66,16 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
       this.isLoading = false
     }
 
+    this.adminDashbaordService.getSports().subscribe(requests => {
+      this.allSports = requests.Sports;
+      this.isLoading = false
+    });
+    this.adminDashbaordService.getInstitutes().subscribe(requests => {
+      this.allInstitutes = requests.Institutes;
+      this.isLoading = false
+    });
+
   }
-
-  // onChangedPage(pageData: PageEvent) {
-  //   this.isLoading = true
-  //   this.currentPage = pageData.pageIndex + 1
-  //   this.projectRequestsPerPage = pageData.pageSize
-  //   this.projectRequestsService.getProjectRequests(this.projectRequestsPerPage, this.currentPage)
-  // }
-
-  // onDelete(projectRequestId: string) {
-  //   this.isLoading = true
-  //   this.projectRequestsService.deleteProjectRequest(projectRequestId).subscribe(() => {
-  //     this.projectRequestsService.getProjectRequests()
-  //   }, () => {
-  //     this.isLoading = false
-  //   })
-  // }
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe()

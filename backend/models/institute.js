@@ -12,8 +12,7 @@ const Institute = sequelize.define('Institute', {
         allowNull: false,
     },
     points: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+        type: Sequelize.INTEGER
     }
 });
 

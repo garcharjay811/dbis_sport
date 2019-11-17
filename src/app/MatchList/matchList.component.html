@@ -13,201 +13,83 @@
           <div class="container">
               <div class="row">
                   <div class="col-md-12 heading-section mb-4">
-            <span class="subheading">Game Schedule</span>
+            <span class="subheading">Upcoming Matches</span>
                   </div>
               </div>
               <div class="row ">
                   <div class="col-md-12 carousel-game-schedule owl-carousel">
-                      <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-1.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
+
+                    <div class="item">
+                      <div class="game-schedule">
+                        <div class="sport-team d-flex align-items-center">
+                          <div class="img logo" style="background-image: url(../../assets/template/images/team-2.jpg);"></div>
+                            <div class="pl-4 desc">
+                              <span class="venue">Home @ Arena</span>
+                                <h4 class="team-name">Knight Warrior</h4>
+                              <span class="date">April 17, 2018</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </div>
-            <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-2.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-3.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-4.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-5.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                          <div class="game-schedule">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-6.jpg);"></div>
-                                  <div class="pl-4 desc">
-                                      <span class="venue">Home @ Arena</span>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                      <span class="date">April 17, 2018</span>
-                                  </div>
-                    </div>
-                </div>
-            </div>
-                  </div>
               </div>
           </div>
       </section>
       
       <section class="ftco-section">
             <div class="container">
-                    <div class="row">
-                        <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-7">
                   <div class="heading-section">
-                      <span class="subheading">Game Report</span>
-                    <h2 class="mb-4">Football Game Reports 2018</h2>
+                      <span class="subheading">Past Games</span>
+                    <h2 class="mb-4">Winners</h2>
                   </div>
             <div *ngFor="let number of answer">
-                        <div class="scoreboard mb-5 mb-lg-3">
-                <div class="divider text-center"><span>{{TeamMatchData[number].date}}; {{TeamMatchData[number].group_name}} Stage</span></div>
-                <div class="d-sm-flex mb-4">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-1.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score win"><span>3</span></h3>
-                                      <h4 class="team-name">{{ TeamMatchData[number].institute1 }}</h4>
-                                  </div>
-                    </div>
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last"
-                        [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number].institute1 + '.jpg)'"
-                        ></div>
-                        <!-- [ngStyle]="{ 'background-image': 'url(../../assets/template/images/' + TeamMatchData[number].institute1 + '.jpg)'}" -->
-                        
-                        <!-- style="background-image: url(../../assets/template/images/team-2.jpg);" -->
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score lost"><span>1</span></h3>
-                                      <h4 class="team-name">{{ TeamMatchData[number].institute2 }}</h4>
-                                  </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p><a href="#" class="btn btn-primary">More Details</a></p>
-                </div>
+          <div class="scoreboard mb-5 mb-lg-3">
+            <div class="divider text-center">
+              <span>{{TeamMatchData[number]?.sport_name}}; {{TeamMatchData[number]?.group_name}} </span>
+              <br>
+              <span>{{TeamMatchData[number]?.venue_name}}</span>
             </div>
-
-        </div>
-
-            <div class="row mt-5">
-                <div class="col text-center">
-                  <div class="block-27">
-                    <ul>
-                      <li><a href="#">&lt;</a></li>
-                      <li class="active"><span>1</span></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#">&gt;</a></li>
-                    </ul>
-                  </div>
+            <div class="d-sm-flex mb-4">
+              <div class="sport-team d-flex align-items-center">
+                <div class="img logo"  [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number]?.ins1 + '.jpg)'"></div>
+                <div class="text-center px-1 px-md-3 desc">
+                  <h4 class="team-name">{{ TeamMatchData[number]?.institute1 }}</h4>
                 </div>
               </div>
+              <div class="sport-team d-flex align-items-center">
+                <div class="text-center px-1 px-md-3 desc">
+                  <h4 class="team-name">{{ TeamMatchData[number]?.institute2 }}</h4>
+                </div>
+                <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number]?.ins2 + '.jpg)'"></div>
+              </div>
+            </div>
+            </div>
+            </div>
+
+          
           </div>
                   <div class="col-md-5 sidebar">
+ 
                       <div class="sidebar-box">
-              <h2 class="mb-4">Latest Video</h2>
-                          <div class="img d-flex align-items-center justify-content-center py-5" style="background-image: url(../../assets/template/images/victory.jpg); width: 100%;">
-                              <p class="text-center mb-0 py-5">
-                                  <a href="https://vimeo.com/45830194" class="icon-video-2 popup-vimeo d-flex justify-content-center align-items-center mr-3">
-                                  <span class="ion-ios-play"></span>
-                              </a>
-                              <small style="color: rgba(255,255,255,1); font-size: 16px;">Watch Highlights</small>
-                          </p>
-                          </div>
-                      </div>
-                      <div class="sidebar-box">
-              <h2 class="mb-4">League Table</h2>
+              <h2 class="mb-4">Points Table</h2>
               <table class="table table-league">
                           <thead>
                             <tr>
-                              <th>Team</th>
-                              <th>G</th>
-                              <th>P</th>
+                              <th>Institute</th>
+                              <!-- <th></th> -->
+                              <th>Points</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>Knights Warrior</td>
-                              <td>14</td>
-                              <td>24</td>
+                            <!-- <div> -->
+                              <tr *ngFor="let institute of allInstitutes">
+                                <td>{{institute.inst_name}}</td>
+                                <!-- <td></td> -->
+                                <td>{{institute.points}}</td>
                             </tr>
-                            <tr>
-                              <td>Mighty Falcons</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
-                            <tr>
-                              <td>Germany Football</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
-                            <tr>
-                              <td>Colorado</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
-                            <tr>
-                              <td>Florida CLub</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
-                            <tr>
-                              <td>Miami Club</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
-                            <tr>
-                              <td>Toronto Team</td>
-                              <td>14</td>
-                              <td>24</td>
-                            </tr>
+                            <!-- </div> -->
                           </tbody>
                         </table>
                       </div>

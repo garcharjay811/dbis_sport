@@ -50,29 +50,38 @@ export class AdminDashboardService {
     return this.http.get(BACKEND_URL + '/getNumberOfTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
   }
 
-  updateTeamMatches(referee_id: Number, venue_name: string, winner: string, date: string, match_id: Number,
+  getNumberOfNullTeamMatches(){
+    return this.http.get(BACKEND_URL + '/getNumberOfNullTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
+  }
+
+  getNullTeamMatches(){
+    return this.http.get(BACKEND_URL + '/getNullTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
+  }
+
+  updateTeamMatches(referee_id: Number, venue_name: string, winner: string, date: Date, match_id: Number,
                     institute1: string, institute2: string, sport_name: string, group_name: string) {
                       // console.log(venue_name);
-    // this.http
-    //   .post<{ message: string; updateTeamMatches: TeamMatch }>(
-    //     BACKEND_URL + '/updateTeamMatch/' + match_id,
-    //     {
-    //         "referee_id": referee_id,
-    //         "venue_name": venue_name,
-    //         "winner": winner,
-    //         "institute1": institute1,
-    //         "institute2": institute2,
-    //         "sport_name": sport_name,
-    //         "date": date,
-    //         "match_id": match_id,
-    //         "group_name": group_name
-    //     }
-    //   )
-    //   .subscribe(responseData => {
-    //     alert("great");
-    //     alert('Successfully updated Match');
-    //     this.router.navigate(['/dashboard'])
-    //   })
+    this.http
+      .post<{ message: string; updateTeamMatches: TeamMatch }>(
+        BACKEND_URL + '/updateTeamMatch/' + match_id,
+        {
+            "referee_id": referee_id,
+            "venue_name": venue_name,
+            "winner": winner,
+            "institute1": institute1,
+            "institute2": institute2,
+            "sport_name": sport_name,
+            "date": date,
+            "match_id": match_id,
+            "group_name": group_name
+        }
+      )
+      .subscribe(responseData => {
+        alert('Successfully updated Match');
+        // this.router.navigate(['/dashboard'])
+      },(err) => {
+        console.log(err);
+      })
   }
 
   populateGroup(inst_name: Array<string>, sport_name: string, group_name: string){

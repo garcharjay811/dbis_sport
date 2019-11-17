@@ -615,9 +615,10 @@ exports.createGroup = (req, res, next) => {
       group_winner: null
     }
     console.log(institutes);
-    Group.findOne({ where: { group_name: req.params.group_name } })
-      .then(Group => {
-        if (Group) {
+    console.log(req.params.group_name);
+    Group.findOrCreate({ where: { group_name: req.params.group_name }, defaults: { sport_name: req.body.sport_name, inst_name: req.body.inst_name } })
+      .then(([Group, created]) => {
+        if (!created) {
           // If Group is found just add institutes to that League
           institutes.map(institute => {
             populateGroup.create({
@@ -625,15 +626,16 @@ exports.createGroup = (req, res, next) => {
               sport_name: req.body.sport_name,
               inst_name: institute.institute
             })
-          }).then(createGroup => {
+          })
+          
             res.status(201).json({
               message: "Matches Added",
-            });
-          }).catch(error => {
-            console.log(error);
-            res.status(500).json({
-              message: "Creating Matches failed!"});
-          });
+            })
+          // catch(error => {
+          //   console.log(error);
+          //   res.status(500).json({
+          //     message: "Creating Matches failed!"});
+          // });
             console.log("Cool");
             for (i = 0; i < institutes.length; i++) {
               for (j = i+1; j < institutes.length; j++) {
@@ -647,69 +649,93 @@ exports.createGroup = (req, res, next) => {
                 })
               } 
           }
-        } else {
-          // Not Found and hence Create Group
-          Group.create(groupInst).then(res => {
-            institutes.map(institute => {
-              populateGroup.create({
-                group_name: req.body.group_name,
-                sport_name: req.body.sport_name,
-                inst_name: institute.institute
-              })
-            })
-          }).then(addMatches => {
-            console.log("Cool");
-            for (i = 0; i < institutes.length; i++) {
-              for (j = i+1; j < institutes.length; j++) {
-                console.log(institutes[i])
-                console.log(institutes[j])
-                TeamMatch.create({
-                  institute1: institutes[i].institute,
-                  institute2: institutes[j].institute,
-                  sport_name: req.body.sport_name,
-                  group_name: req.body.group_name,
-                })
-              }
-            } 
-          }).then(createGroup => {
-            res.status(201).json({
-              message: "Created Group and Added Matches",
-            });
-          }).catch(error => {
-            console.log(error);
-            res.status(500).json({
-              message: "Creating Group and Matches failed!"});
-          });
+        // } else {
+        //   // Not Found and hence Create Group
+        //     console.log("Cool");
+        //     for (i = 0; i < institutes.length; i++) {
+        //       for (j = i+1; j < institutes.length; j++) {
+        //         console.log(institutes[i])
+        //         console.log(institutes[j])
+        //         TeamMatch.create({
+        //           institute1: institutes[i].institute,
+        //           institute2: institutes[j].institute,
+        //           sport_name: req.body.sport_name,
+        //           group_name: req.body.group_name,
+        //         })
+        //       }
+        //     }.then(createGroup => {
+        //     res.status(201).json({
+        //       message: "Created Group and Added Matches",
+        //     });
+        //   }).catch(error => {
+        //     console.log(error);
+        //     res.status(500).json({
+        //       message: "Creating Group and Matches failed!"});
+        //   });
         }
       })
   };
 
   exports.updateTeamMatch = (req, res, next) => {
-    console.log("bad");
     const teamMatchData = {
         venue_name : req.body.venue_name,
         date : new Date(req.body.date),
         referee_id : req.body.referee_id,
         winner: req.body.winner
     };
-    console.log("great: " + venue_name + " " + date + " " + referee_id);
-    console.log("req.params.match_id", req.params.match_id)
-    TeamMatch.update( teamMatchData, { where: { match_id: parseInt(req.params.match_id) } })
+    // console.log(req.body);
+    // console.log("req.params.match_id", req.params.match_id)
+    if (req.body.winner != null)
+    {
+      var institute = {inst_name: null, points: null};
+      var new_points = 0;
+      Institute.findOne({where: { inst_name: req.body.winner }})
       .then(result => {
-        if (result[0] > 0) {
-          res.status(200).json({ message: "Update successful!" });
-        } else {
-          res.status(401).json({ message: "Not authorized!" });
+        if(result) {
+          console.log(result.dataValues.points);
+          if(result.dataValues.points == null){
+            new_points = 1;
+          }
+          else {
+            new_points = result.dataValues.points + 1;            
+          }
+          institute = {
+            inst_name : req.body.winner,
+            points: new_points
+          }
         }
+      }).then(result => {
+        console.log(institute)
+        Institute.update( institute, { where: { inst_name: req.body.winner } })
+        .then(result => {
+          if(result[0] > 0){
+            res.status(200).json({ message: "Update successful!" });
+          } else {
+            res.status(401).json({ message: "Not authorized!" });
+          }
       })
-      .catch(error => {
-        alert("cool");
-        console.log(teamMatchData.match_id);
-        res.status(500).json({
-          message: "Couldn't update TeamMatch Information!"
+        .catch(error => {
+          res.status(500).json({
+            message: "Couldn't update Points Information!"
+          });
         });
       });
-  };
+    }
+    TeamMatch.update( teamMatchData, { where: { match_id: parseInt(req.params.match_id) } })
+      // .then(result => {
+      //   if (result[0] > 0) {
+      //     res.status(200).json({ message: "Update successful!" });
+      //   } else {
+      //     res.status(401).json({ message: "Not authorized!" });
+      //   }
+      // })
+      // .catch(error => {
+      //   console.log(teamMatchData.match_id);
+      //   res.status(500).json({
+      //     message: "Couldn't update TeamMatch Information!"
+      //   });
+      // });
+    }
 
   exports.getTeamMatches = (req, res, next) => {
     TeamMatch.findAll()
@@ -741,3 +767,45 @@ exports.createGroup = (req, res, next) => {
       });
     });
   }
+
+  exports.getNumberOfNullTeamMatches = (req,res,next) => {
+    TeamMatch.findAndCountAll({
+      where: {
+        winner: null
+      }
+    })
+    .then(requests => {
+      res.status(200).json({
+        message: "Number of Null Team Matches fetched successfully!",
+        value: requests,
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching Number of Null Team Matches failed!"
+      });
+    });
+  }
+  exports.getNullTeamMatches = (req, res, next) => {
+    TeamMatch.findAll(
+      {where : {
+        winner: null
+      }}
+    )
+    .then(requests => {
+        res.status(200).json({
+          message: "Team Matches fetched successfully!",
+          TeamMatches: requests,
+        });
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "Fetching Team Matches failed!"
+        });
+      });
+  };
+
+
+  // -------------------------
+  // 
+  // -------------------------
