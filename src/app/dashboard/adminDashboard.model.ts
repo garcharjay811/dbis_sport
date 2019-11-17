@@ -55,6 +55,19 @@ export interface TeamMatch {
     winner: string
 }
 
+export interface TeamMatchtemp {
+    match_id: Number,
+    institute1: string,
+    institute2: string,
+    sport_name: string,
+    group_name: string,
+    venue_name: string,
+    date: Date,
+    referee_id: Number,
+    winner: string,
+    image: string
+}
+
 export interface Venue {
     venue_name: string,
     address: string,

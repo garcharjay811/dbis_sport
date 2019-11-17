@@ -352,15 +352,17 @@ export class adminDashboardComponent implements OnInit, OnDestroy {
       }
 
       onUpdateMatch(index) {
-        console.log("HI");
-        this.TeamMatchData[index].referee_id = this.AllTeamMatchFromGroups[index].value.referee_id,
-          this.TeamMatchData[index].venue_name = this.AllTeamMatchFromGroups[index].value.venue_name,
-          this.TeamMatchData[index].winner = this.AllTeamMatchFromGroups[index].value.winner,
-          this.TeamMatchData[index].date = this.AllTeamMatchFromGroups[index].value.date,
+        console.log("index: " + index);
+        console.log("venue_name: " + this.AllTeamMatchFromGroups[index].value.venue_name );
+        this.TeamMatchData[index].referee_id = this.AllTeamMatchFromGroups[index].value.referee_id;
+          this.TeamMatchData[index].venue_name = this.AllTeamMatchFromGroups[index].value.venue_name;
+          this.TeamMatchData[index].winner = this.AllTeamMatchFromGroups[index].value.winner;
+          this.TeamMatchData[index].date = this.AllTeamMatchFromGroups[index].value.date;
+          console.log(this.TeamMatchData[index]);
         this.adminDashbaordService.updateTeamMatches(
           this.TeamMatchData[index].referee_id,
           this.TeamMatchData[index].venue_name,
-          this.TeamMatchData[index].winner,
+          this.TeamMatchData[index].winner.toString(),
           this.TeamMatchData[index].date.toString(),
           this.TeamMatchData[index].match_id,
           this.TeamMatchData[index].institute1,

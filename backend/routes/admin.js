@@ -33,7 +33,7 @@ router.post("/addGroup", AdminController.createGroup);
 // router.post("/populateGroup", AdminController.PopulateGroup);
 router.get("/getPopulatedGroups", AdminController.getPopulatedGroups);
 router.get("/getGroups", AdminController.getGroups);
-router.post("/PopulateGroup", AdminController.addGroupAndPopulate);
+router.post("/PopulateGroup/:group_name", AdminController.addGroupAndPopulate);
 
 router.post("/updateTeamMatch/:match_id", AdminController.updateTeamMatch);
 router.get("/getTeamMatches", AdminController.getTeamMatches);

@@ -614,51 +614,88 @@ exports.createGroup = (req, res, next) => {
       sport_name: req.body.sport_name,
       group_winner: null
     }
-    Group.create(groupInst).then(res => {
-      institutes.map(institute => {
-        populateGroup.create({
-          group_name: req.body.group_name,
-          sport_name: req.body.sport_name,
-          inst_name: institute.institute
-        })
-      })
-    }).then(addMatches => {
-      console.log("Cool");
-      for (i = 0; i < institutes.length; i++) {
-        for (j = i+1; j < institutes.length; j++) {
-          console.log(institutes[i])
-          console.log(institutes[j])
-          TeamMatch.create({
-            institute1: institutes[i].institute,
-            institute2: institutes[j].institute,
-            sport_name: req.body.sport_name,
-            group_name: req.body.group_name,
-          })
+    console.log(institutes);
+    Group.findOne({ where: { group_name: req.params.group_name } })
+      .then(Group => {
+        if (Group) {
+          // If Group is found just add institutes to that League
+          institutes.map(institute => {
+            populateGroup.create({
+              group_name: req.body.group_name,
+              sport_name: req.body.sport_name,
+              inst_name: institute.institute
+            })
+          }).then(createGroup => {
+            res.status(201).json({
+              message: "Matches Added",
+            });
+          }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+              message: "Creating Matches failed!"});
+          });
+            console.log("Cool");
+            for (i = 0; i < institutes.length; i++) {
+              for (j = i+1; j < institutes.length; j++) {
+                console.log(institutes[i])
+                console.log(institutes[j])
+                TeamMatch.create({
+                  institute1: institutes[i].institute,
+                  institute2: institutes[j].institute,
+                  sport_name: req.body.sport_name,
+                  group_name: req.body.group_name,
+                })
+              } 
+          }
+        } else {
+          // Not Found and hence Create Group
+          Group.create(groupInst).then(res => {
+            institutes.map(institute => {
+              populateGroup.create({
+                group_name: req.body.group_name,
+                sport_name: req.body.sport_name,
+                inst_name: institute.institute
+              })
+            })
+          }).then(addMatches => {
+            console.log("Cool");
+            for (i = 0; i < institutes.length; i++) {
+              for (j = i+1; j < institutes.length; j++) {
+                console.log(institutes[i])
+                console.log(institutes[j])
+                TeamMatch.create({
+                  institute1: institutes[i].institute,
+                  institute2: institutes[j].institute,
+                  sport_name: req.body.sport_name,
+                  group_name: req.body.group_name,
+                })
+              }
+            } 
+          }).then(createGroup => {
+            res.status(201).json({
+              message: "Created Group and Added Matches",
+            });
+          }).catch(error => {
+            console.log(error);
+            res.status(500).json({
+              message: "Creating Group and Matches failed!"});
+          });
         }
-      } 
-    }).then(createGroup => {
-      res.status(201).json({
-        message: "Created Group and Added Matches",
-      });
-    }).catch(error => {
-      console.log(error);
-      res.status(500).json({
-        message: "Creating Group and Matches failed!"});
-    });
+      })
   };
 
   exports.updateTeamMatch = (req, res, next) => {
+    console.log("bad");
     const teamMatchData = {
         venue_name : req.body.venue_name,
         date : new Date(req.body.date),
         referee_id : req.body.referee_id,
         winner: req.body.winner
     };
-    console.log(teamMatchData);
+    console.log("great: " + venue_name + " " + date + " " + referee_id);
     console.log("req.params.match_id", req.params.match_id)
     TeamMatch.update( teamMatchData, { where: { match_id: parseInt(req.params.match_id) } })
       .then(result => {
-        console.log("result", result)
         if (result[0] > 0) {
           res.status(200).json({ message: "Update successful!" });
         } else {
@@ -666,7 +703,7 @@ exports.createGroup = (req, res, next) => {
         }
       })
       .catch(error => {
-        console.log(error);
+        alert("cool");
         console.log(teamMatchData.match_id);
         res.status(500).json({
           message: "Couldn't update TeamMatch Information!"
@@ -691,10 +728,8 @@ exports.createGroup = (req, res, next) => {
 
 
   exports.getNumberOfTeamMatches = (req,res,next) => {
-    console.log(TeamMatch.findAndCountAll());
     TeamMatch.findAndCountAll()
     .then(requests => {
-      console.log(requests);
       res.status(200).json({
         message: "Number of Team Matches fetched successfully!",
         value: requests,

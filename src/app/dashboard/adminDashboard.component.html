@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
-                <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Admin Panel</h1>
+                <h1 class="mb-4 HEAD" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Admin Panel</h1>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
 <br>
 <br>
 <br>
-
+<h3 class="text_2">Functionalities</h3>
 <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4 col-xs-4">
@@ -42,7 +42,7 @@
                             <mat-form-field>
                             <input matInput type="text" formControlName="sport_type" placeholder="Individual/Team">
                             </mat-form-field>
-                            <button mat-raised-button color="accent" type="submit">Add Sport</button>
+                            <button mat-raised-button color="primary" type="submit">Add Sport</button>
                         </form>
                         </mat-expansion-panel>
                     </mat-accordion>
@@ -72,7 +72,7 @@
                             <mat-form-field>
                             <input matInput type="number" formControlName="phone" placeholder="Phone Number of Sports Officer">
                             </mat-form-field>
-                            <button mat-raised-button color="accent" type="submit">Add Institute and Sports Officer</button>
+                            <button mat-raised-button color="primary" type="submit">Add Institute and Sports Officer</button>
                         </form>
                         </mat-expansion-panel>
                     </mat-accordion>
@@ -116,7 +116,7 @@
                                         <mat-form-field>
                                         <input matInput type="number" formControlName="phone" placeholder="Phone Number">
                                         </mat-form-field>
-                                        <button mat-raised-button color="accent" type="submit">Add Participant</button>
+                                        <button mat-raised-button color="primary" type="submit">Add Participant</button>
                                     </form>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -179,7 +179,7 @@
                                 </div>
                                 <button mat-raised-button type="button" (click)="addInstitute()">Add Institute</button>      
                                 <br> <br>
-                                <button mat-raised-button color="accent" type="submit">Add Group</button>
+                                <button mat-raised-button color="primary" type="submit">Add Group</button>
                             </form>
                             </mat-expansion-panel>
                         </mat-accordion>
@@ -212,7 +212,7 @@
                             <input matInput type="number" formControlName="phone" placeholder="Phone Number">
                             <!-- <mat-error *ngIf="form.get('phone').invalid">Please enter Phone number of the Referee.</mat-error> -->
                             </mat-form-field>
-                            <button mat-raised-button color="accent" type="submit">Add Referee</button>
+                            <button mat-raised-button color="primary" type="submit">Add Referee</button>
                         </form>
                     </mat-expansion-panel>
                 </mat-accordion>
@@ -236,7 +236,7 @@
                         <textarea matInput type="text" formControlName="address" placeholder="Address"></textarea>
                         <!-- <mat-error *ngIf="form.get('address').invalid">Please enter address of the Venue.</mat-error> -->
                         </mat-form-field>
-                        <button mat-raised-button color="accent" type="submit">Add Venue</button>
+                        <button mat-raised-button color="primary" type="submit">Add Venue</button>
                     </form>
                     </mat-expansion-panel>
                 </mat-accordion>
@@ -251,14 +251,17 @@
             
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <div class="col-xs-8 col-sm-8 col-lg-8">
                         <div *ngFor="let number of answer">
                                 <mat-accordion>
                                         <mat-expansion-panel>
                                             <mat-expansion-panel-header>
                                             <mat-panel-title>
-                                                Match {{ number }}
+                                                {{ TeamMatchData[number].institute1 }} vs {{ TeamMatchData[number].institute2 }} 
                                             </mat-panel-title>
+                                            <mat-panel-description>
+                                                {{ TeamMatchData[number].sport_name }}
+                                              </mat-panel-description>
                                             </mat-expansion-panel-header>
                                     
                                             <form [formGroup]="AllTeamMatchFromGroups[number]" (submit)="onUpdateMatch(number)" *ngIf="!isLoading">
@@ -311,7 +314,7 @@
                                                     </mat-select>
                                                 </mat-form-field>
             
-                                                <button mat-raised-button color="accent" type="submit">Update</button>
+                                                <button mat-raised-button color="primary" type="submit">Update</button>
                                             </form>
                                     
                                         </mat-expansion-panel>

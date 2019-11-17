@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs'
 
 import { AuthService } from '../auth/auth.service'
 import { AdminDashboardService } from '../dashboard/adminDashboard.service'
-import { TeamMatch } from '../dashboard/adminDashboard.model'
+import { TeamMatch, TeamMatchtemp } from '../dashboard/adminDashboard.model'
+import { DomSanitizer } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-matchList',
@@ -15,12 +16,19 @@ export class MatchListComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription
   private userTypeStatusSub: Subscription
   userType = 'customer'
-  TeamMatchData: TeamMatch[] = [];
+  TeamMatchData: TeamMatchtemp[] = [];
   i = 0;
   Winners : Array<String[]> = [];
   answer : Number[] = [];
+  institute1;
+  institute2;
   constructor(private authService: AuthService,
-    private adminDashboardService: AdminDashboardService) {}
+    private adminDashboardService: AdminDashboardService,
+    private sanitizer: DomSanitizer) {}
+
+    public getSantizeUrl(image : string) {
+      return this.sanitizer.bypassSecurityTrustStyle('url(${image})');
+  }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth()
@@ -41,7 +49,8 @@ export class MatchListComponent implements OnInit, OnDestroy {
               venue_name: Match.venue_name,
               date: Match.date,
               referee_id: Match.referee_id,
-              winner: Match.winner
+              winner: Match.winner,
+              image: Match.institute1
             }
             this.Winners[this.i] = [Match.institute1, Match.institute2];
 
