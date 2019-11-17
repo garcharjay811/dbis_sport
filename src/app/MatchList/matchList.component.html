@@ -2,7 +2,7 @@
     <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-            <div class="col-md-7 ftco-animate mt-5" data-scrollax=" properties: { translateY: '70%' }">
+            <div class="col-md-7 mt-5" data-scrollax=" properties: { translateY: '70%' }">
                 <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Matches</h1>
             </div>
             </div>
@@ -108,14 +108,19 @@
                 <div class="divider text-center"><span>{{TeamMatchData[number].date}}; {{TeamMatchData[number].group_name}} Stage</span></div>
                 <div class="d-sm-flex mb-4">
                     <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" [style.background-image] = ""></div>
+                        <div class="img logo" style="background-image: url(../../assets/template/images/team-1.jpg);"></div>
                                   <div class="text-center px-1 px-md-3 desc">
                                       <h3 class="score win"><span>3</span></h3>
                                       <h4 class="team-name">{{ TeamMatchData[number].institute1 }}</h4>
                                   </div>
                     </div>
                     <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last" style="background-image: url(../../assets/template/images/team-2.jpg);"></div>
+                        <div class="img logo order-sm-last"
+                        [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number].institute1 + '.jpg)'"
+                        ></div>
+                        <!-- [ngStyle]="{ 'background-image': 'url(../../assets/template/images/' + TeamMatchData[number].institute1 + '.jpg)'}" -->
+                        
+                        <!-- style="background-image: url(../../assets/template/images/team-2.jpg);" -->
                                   <div class="text-center px-1 px-md-3 desc">
                                       <h3 class="score lost"><span>1</span></h3>
                                       <h4 class="team-name">{{ TeamMatchData[number].institute2 }}</h4>
@@ -129,98 +134,6 @@
 
         </div>
 
-          
-            
-
-            <!-- <div class="scoreboard mb-5 mb-lg-3">
-                <div class="divider text-center"><span>Tue. Feb 21, 2019; FIFA Champions League</span></div>
-                <div class="d-sm-flex mb-4">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-3.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score lost"><span>0</span></h3>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                  </div>
-                    </div>
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last" style="background-image: url(../../assets/template/images/team-4.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score win"><span>2</span></h3>
-                                      <h4 class="team-name">Mighty Falcons</h4>
-                                  </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p><a href="#" class="btn btn-primary">More Details</a></p>
-                </div>
-            </div>
-
-            <div class="scoreboard mb-5 mb-lg-3">
-                <div class="divider text-center"><span>Tue. Feb 21, 2019; FIFA Champions League</span></div>
-                <div class="d-sm-flex mb-4">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-5.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score win"><span>4</span></h3>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                  </div>
-                    </div>
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last" style="background-image: url(../../assets/template/images/team-6.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score lost"><span>2</span></h3>
-                                      <h4 class="team-name">Mighty Falcons</h4>
-                                  </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p><a href="#" class="btn btn-primary">More Details</a></p>
-                </div>
-            </div>
-            <div class="scoreboard mb-5 mb-lg-3">
-                <div class="divider text-center"><span>Tue. Feb 21, 2019; FIFA Champions League</span></div>
-                <div class="d-sm-flex mb-4">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-1.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score win"><span>3</span></h3>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                  </div>
-                    </div>
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last" style="background-image: url(../../assets/template/images/team-5.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score lost"><span>2</span></h3>
-                                      <h4 class="team-name">Mighty Falcons</h4>
-                                  </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p><a href="#" class="btn btn-primary">More Details</a></p>
-                </div>
-            </div>
-            <div class="scoreboard mb-5 mb-lg-3">
-                <div class="divider text-center"><span>Tue. Feb 21, 2019; FIFA Champions League</span></div>
-                <div class="d-sm-flex mb-4">
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo" style="background-image: url(../../assets/template/images/team-6.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score win"><span>3</span></h3>
-                                      <h4 class="team-name">Knight Warrior</h4>
-                                  </div>
-                    </div>
-                    <div class="sport-team d-flex align-items-center">
-                        <div class="img logo order-sm-last" style="background-image: url(../../assets/template/images/team-3.jpg);"></div>
-                                  <div class="text-center px-1 px-md-3 desc">
-                                      <h3 class="score lost"><span>2</span></h3>
-                                      <h4 class="team-name">Mighty Falcons</h4>
-                                  </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p><a href="#" class="btn btn-primary">More Details</a></p>
-                </div>
-            </div> -->
             <div class="row mt-5">
                 <div class="col text-center">
                   <div class="block-27">
@@ -299,37 +212,6 @@
                         </table>
                       </div>
                       <div class="sidebar-box">
-              <h2 class="mb-4">Top Scores</h2>
-              <div class="row">
-                  <div class="col-md-6 top-score pb-4 mb-1">
-                              <div class="img" style="background-image: url(../../assets/template/images/staff-1.jpg);"></div>
-                              <div class="text text-center">
-                                  <h3 class="mb-0">David Scott</h3>
-                                  <span class="score">12 games / 10 goals</span>
-                              </div>
-                          </div>
-                          <div class="col-md-6 top-score pb-4 mb-1">
-                              <div class="img" style="background-image: url(../../assets/template/images/staff-2.jpg);"></div>
-                              <div class="text text-center">
-                                  <h3 class="mb-0">David Scott</h3>
-                                  <span class="score">12 games / 10 goals</span>
-                              </div>
-                          </div>
-                          <div class="col-md-6 top-score pb-4 mb-1">
-                              <div class="img" style="background-image: url(../../assets/template/images/staff-3.jpg);"></div>
-                              <div class="text text-center">
-                                  <h3 class="mb-0">David Scott</h3>
-                                  <span class="score">12 games / 10 goals</span>
-                              </div>
-                          </div>
-                          <div class="col-md-6 top-score pb-4 mb-1">
-                              <div class="img" style="background-image: url(../../assets/template/images/staff-4.jpg);"></div>
-                              <div class="text text-center">
-                                  <h3 class="mb-0">David Scott</h3>
-                                  <span class="score">12 games / 10 goals</span>
-                              </div>
-                          </div>
-              </div>
                       </div>
                   </div>
               </div>
@@ -338,35 +220,35 @@
 
 
 <footer class="ftco-footer ftco-footer-2 ftco-section">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Sporty</h2>
-            <p>Sporty is a Sports Event Mangaement System made as a part of CS313 Course Project. </p>
-            <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Sporty</h2>
+          <p>A sport event management system to manange large sporting event with multiple participants and sports.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+            <!-- <li class=""><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class=""><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class=""><a href="#"><span class="icon-instagram"></span></a></li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Contact Us</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><span class="icon icon-map-marker"></span><span class="text">Belur, IIT Dharwad, Dharwad, Karnataka, India</span></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 6969696969</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">iitdh.ac.in</span></a></li>
             </ul>
           </div>
         </div>
-        <div class="col-md">
-          <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Contact Us</h2>
-              <div class="block-23 mb-3">
-                <ul>
-                  <li><span class="icon icon-map-marker"></span><span class="text">Belur, IIT Dharwad, Nr. High Court, Dharwad, Karnataka</span></li>
-                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 6969696969</span></a></li>
-                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">iit@dharwad.com</span></a></li>
-                </ul>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
       </div>
     </div>
-  </footer>
-
-
+    <div class="row">
+      <div class="col-md-12 text-center">
+      </div>
+    </div>
+  </div>
+</footer>
