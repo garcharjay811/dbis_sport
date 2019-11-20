@@ -58,6 +58,14 @@ export class AdminDashboardService {
     return this.http.get(BACKEND_URL + '/getNullTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
   }
 
+  getUpcomingTeamMatches(){
+    return this.http.get(BACKEND_URL + '/getUpcomingTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
+  }
+
+  getCompletedTeamMatches(){
+    return this.http.get(BACKEND_URL + '/getCompletedTeamMatches').pipe(map((response: any) => response), catchError((err) => { throw err }))
+  }
+
   updateTeamMatches(referee_id: Number, venue_name: string, winner: string, date: Date, match_id: Number,
                     institute1: string, institute2: string, sport_name: string, group_name: string) {
                       // console.log(venue_name);

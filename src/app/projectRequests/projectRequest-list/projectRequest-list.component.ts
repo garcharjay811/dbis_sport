@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewEncapsulation, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
 import { PageEvent } from '@angular/material'
+import { CountdownComponent } from 'ngx-countdown';
 import { Subscription } from 'rxjs'
 
 import { ProjectRequest } from '../projectRequest.model'
 import { ProjectRequestsService } from '../projectRequests.service'
 import { AuthService } from '../../auth/auth.service'
 import { AdminDashboardService } from 'src/app/dashboard/adminDashboard.service'
-import { Sport, Institute} from 'src/app/dashboard/adminDashboard.model'
+import { Sport, Institute, TeamMatch} from 'src/app/dashboard/adminDashboard.model'
 
 @Component({
   selector: 'app-project-request-list',
@@ -25,14 +26,24 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
   pageSizeOptions = [1, 2, 5, 10]
   userIsAuthenticated = false
   userId: string
+  endDate: Date;
+  upcomingTeamMatch;
   private authStatusSub: Subscription
-  private userTypeStatusSub: Subscription
+  private userTypeStatusSub: Subscription;
+  static x : boolean = true;
+  cureentTimeStamp : number =  Date.now();
+  @ViewChild('countdown',{static: false}) counter: CountdownComponent;
 
   constructor(
     public projectRequestsService: ProjectRequestsService,
     private authService: AuthService,
     private adminDashbaordService: AdminDashboardService
   ) {}
+
+  finishTest() {
+    console.log("count down", this.counter);
+    this.counter.restart();
+  }
 
   ngOnInit() {
     this.isLoading = true
@@ -75,10 +86,32 @@ export class ProjectRequestListComponent implements OnInit, OnDestroy {
       this.isLoading = false
     });
 
+    this.adminDashbaordService.getUpcomingTeamMatches().subscribe(requests => {
+      console.log(requests.UpcomingTeamMatches);
+      this.upcomingTeamMatch = {
+        institute1 : requests.UpcomingTeamMatches[0].institute1,
+        institute2 : requests.UpcomingTeamMatches[0].institute2,
+        match_id : requests.UpcomingTeamMatches[0].match_id,
+        sport_name : requests.UpcomingTeamMatches[0].sport_name,
+        group_name : requests.UpcomingTeamMatches[0].group_name,
+        venue_name : requests.UpcomingTeamMatches[0].venue_name,
+        date: requests.UpcomingTeamMatches[0].date,
+        referee_id : requests.UpcomingTeamMatches[0].referee_id,
+        winner : requests.UpcomingTeamMatches[0].winner,
+        ins1 : requests.UpcomingTeamMatches[0].institute1.replace(/\s/g,''),
+        ins2 : requests.UpcomingTeamMatches[0].institute2.replace(/\s/g,'')
+      }
+      console.log(this.upcomingTeamMatch.ins2);
+      var temp :number = this.upcomingTeamMatch.date;
+      this.cureentTimeStamp = temp - this.cureentTimeStamp;
+      console.log(this.cureentTimeStamp);
+    })
+
   }
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe()
     this.userTypeStatusSub.unsubscribe()
   }
+
 }

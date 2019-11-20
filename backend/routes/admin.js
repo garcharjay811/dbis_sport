@@ -41,6 +41,7 @@ router.get("/getNumberOfTeamMatches", AdminController.getNumberOfTeamMatches);
 router.get("/getNumberOfNullTeamMatches", AdminController.getNumberOfNullTeamMatches);
 
 router.get("/getNullTeamMatches", AdminController.getNullTeamMatches);
-
+router.get("/getUpcomingTeamMatches", AdminController.getUpcomingMatches);
+router.get("/getCompletedTeamMatches", AdminController.getCompletedMatches);
 
 module.exports = router;

@@ -17,10 +17,13 @@ export class MatchListComponent implements OnInit, OnDestroy {
   private userTypeStatusSub: Subscription
   userType = 'customer'
   TeamMatchData = [];
+  upcomingTeamMatch: TeamMatch[] = [];
+  completedTeamMatch = [];
   i = 0;
   j = 0;
   Winners : Array<String[]> = [];
   answer : Number[] = [];
+  answer2 : Number[] = [];
   booleanCheckForWinners : Boolean[] = [];
   allInstitutes = [{points: null, inst_name: null, inst: null}];
   institute1;
@@ -34,6 +37,9 @@ export class MatchListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.adminDashboardService.getUpcomingTeamMatches().subscribe(requests => {
+      this.upcomingTeamMatch = requests.UpcomingTeamMatches;
+    })
     this.userIsAuthenticated = this.authService.getIsAuth()
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
@@ -90,6 +96,31 @@ export class MatchListComponent implements OnInit, OnDestroy {
               this.answer[this.i] = this.i;
             }
           });
+      })
+
+      this.adminDashboardService.getCompletedTeamMatches().subscribe(requests => {
+        requests.CompletedTeamMatches.map(Match => {
+          console.log(Match)
+          // if(Match.winner != null) {
+            this.completedTeamMatch[this.i] = {
+              match_id: Match.match_id,
+              institute1 : Match.institute1,
+              institute2 : Match.institute2,
+              sport_name : Match.sport_name,
+              group_name : Match.group_name,
+              venue_name: Match.venue_name,
+              date: Match.date,
+              referee_id: Match.referee_id,
+              winner: Match.winner,
+              image: Match.institute1,
+              ins1: Match.institute1.replace(/\s/g,''),
+              ins2: Match.institute2.replace(/\s/g,''),
+            }
+            this.i = this.i + 1;
+            
+            this.Winners[this.i] = [Match.institute1, Match.institute2];
+          // }
+        })
       })
   }
 

@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { ProjectRequestListComponent } from './projectRequests/projectRequest-list/projectRequest-list.component'
 import { ProjectRequestCreateComponent } from './projectRequests/projectRequest-create/projectRequest-create.component'
 import { MatchListComponent } from './MatchList/matchList.component'
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -41,7 +42,8 @@ import { MatchListComponent } from './MatchList/matchList.component'
     AngularMaterialModule,
     MatOptionModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    CountdownModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

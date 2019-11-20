@@ -7,6 +7,8 @@ const SportsOfficer = require("../models/sportsOfficer");
 const Group = require("../models/group");
 const TeamMatch = require("../models/teamMatch");
 const populateGroup = require("../models/populateGroup");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 exports.createSport = (req, res, next) => {
@@ -807,5 +809,47 @@ exports.createGroup = (req, res, next) => {
 
 
   // -------------------------
-  // 
+  // Sort and return for Countdown timer
   // -------------------------
+
+  exports.getUpcomingMatches = (req,res,next) => {
+    TeamMatch.findAll({
+      where : {
+        winner : null,
+        date : {
+          [Op.ne] : null,
+        }
+      },
+      order : [
+        [ 'date', 'ASC' ]
+      ]
+    }).then(requests => {
+      res.status(200).json({
+        message: "Upcoming Team Matches fetched successfully!",
+        UpcomingTeamMatches: requests,
+      });
+    }).catch(error => {
+      res.status(500).json({
+        message: "Fetching Upcoming Team Matches Failed!"
+      });
+    })
+  }
+
+  exports.getCompletedMatches = (req,res,next) => {
+    TeamMatch.findAll({
+      where : {
+        winner : {
+          [Op.ne] : null
+        }
+      }
+    }).then(requests => {
+      res.status(200).json({
+        message: "Completed Team Matches fetched successfully!",
+        CompletedTeamMatches: requests,
+      });
+    }).catch(error => {
+      res.status(500).json({
+        message: "Fetching Completed Team Matches Failed!"
+      });
+    })
+  }

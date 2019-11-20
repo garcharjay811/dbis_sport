@@ -22,16 +22,82 @@
                     <div class="item">
                       <div class="game-schedule">
                         <div class="sport-team d-flex align-items-center">
-                          <div class="img logo" style="background-image: url(../../assets/template/images/team-2.jpg);"></div>
+                          <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[0].sport_name + '.jpg)'"></div>
                             <div class="pl-4 desc">
-                              <span class="venue">Home @ Arena</span>
-                                <h4 class="team-name">Knight Warrior</h4>
-                              <span class="date">April 17, 2018</span>
+                              <span class="venue">{{upcomingTeamMatch[0].group_name}} | {{upcomingTeamMatch[0].venue}}</span>
+                                <h4 class="team-name">{{upcomingTeamMatch[0].institute1}} vs {{upcomingTeamMatch[0].institute2}}</h4>
+                              <span class="date">{{upcomingTeamMatch[0].date}}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+
+                    <div class="item">
+                      <div class="game-schedule">
+                        <div class="sport-team d-flex align-items-center">
+                          <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[1].sport_name + '.jpg)'"></div>
+                            <div class="pl-4 desc">
+                              <span class="venue">{{upcomingTeamMatch[1].group_name}} | {{upcomingTeamMatch[1].venue}}</span>
+                                <h4 class="team-name">{{upcomingTeamMatch[1].institute1}} vs {{upcomingTeamMatch[1].institute2}}</h4>
+                              <span class="date">{{upcomingTeamMatch[1].date}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="item">
+                      <div class="game-schedule">
+                        <div class="sport-team d-flex align-items-center">
+                          <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[2].sport_name + '.jpg)'"></div>
+                            <div class="pl-4 desc">
+                              <span class="venue">{{upcomingTeamMatch[2].group_name}} | {{upcomingTeamMatch[2].venue}}</span>
+                                <h4 class="team-name">{{upcomingTeamMatch[2].institute1}} vs {{upcomingTeamMatch[2].institute2}}</h4>
+                              <span class="date">{{upcomingTeamMatch[2].date}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="item">
+                          <div class="game-schedule">
+                            <div class="sport-team d-flex align-items-center">
+                              <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[0].sport_name + '.jpg)'"></div>
+                                <div class="pl-4 desc">
+                                  <span class="venue">{{upcomingTeamMatch[0].group_name}} | {{upcomingTeamMatch[0].venue}}</span>
+                                    <h4 class="team-name">{{upcomingTeamMatch[0].institute1}} vs {{upcomingTeamMatch[0].institute2}}</h4>
+                                  <span class="date">{{upcomingTeamMatch[0].date}}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="item">
+                              <div class="game-schedule">
+                                <div class="sport-team d-flex align-items-center">
+                                  <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[0].sport_name + '.jpg)'"></div>
+                                    <div class="pl-4 desc">
+                                      <span class="venue">{{upcomingTeamMatch[0].group_name}} | {{upcomingTeamMatch[0].venue}}</span>
+                                        <h4 class="team-name">{{upcomingTeamMatch[0].institute1}} vs {{upcomingTeamMatch[0].institute2}}</h4>
+                                      <span class="date">{{upcomingTeamMatch[0].date}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="item">
+                      <div class="game-schedule">
+                        <div class="sport-team d-flex align-items-center">
+                          <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + upcomingTeamMatch[0].sport_name + '.jpg)'"></div>
+                            <div class="pl-4 desc">
+                              <span class="venue">{{upcomingTeamMatch[0].group_name}} | {{upcomingTeamMatch[0].venue}}</span>
+                                <h4 class="team-name">{{upcomingTeamMatch[0].institute1}} vs {{upcomingTeamMatch[0].institute2}}</h4>
+                              <span class="date">{{upcomingTeamMatch[0].date}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
               </div>
           </div>
       </section>
@@ -44,27 +110,28 @@
                       <span class="subheading">Past Games</span>
                     <h2 class="mb-4">Winners</h2>
                   </div>
-            <div *ngFor="let number of answer">
+            <div *ngFor="let match of completedTeamMatch">
           <div class="scoreboard mb-5 mb-lg-3">
             <div class="divider text-center">
-              <span>{{TeamMatchData[number]?.sport_name}}; {{TeamMatchData[number]?.group_name}} </span>
+              <span>{{match?.sport_name}}; {{match?.group_name}} </span>
               <br>
-              <span>{{TeamMatchData[number]?.venue_name}}</span>
+              <span>{{match?.venue_name}}</span>
             </div>
             <div class="d-sm-flex mb-4">
               <div class="sport-team d-flex align-items-center">
-                <div class="img logo"  [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number]?.ins1 + '.jpg)'"></div>
+                <div class="img logo"  [style.background-image]="'url(../../assets/template/images/' + match?.ins1 + '.jpg)'"></div>
                 <div class="text-center px-1 px-md-3 desc">
-                  <h4 class="team-name">{{ TeamMatchData[number]?.institute1 }}</h4>
+                  <h4 class="team-name">{{ match?.institute1 }}</h4>
                 </div>
               </div>
               <div class="sport-team d-flex align-items-center">
                 <div class="text-center px-1 px-md-3 desc">
-                  <h4 class="team-name">{{ TeamMatchData[number]?.institute2 }}</h4>
+                  <h4 class="team-name">{{ match?.institute2 }}</h4>
                 </div>
-                <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + TeamMatchData[number]?.ins2 + '.jpg)'"></div>
+                <div class="img logo" [style.background-image]="'url(../../assets/template/images/' + match?.ins2 + '.jpg)'"></div>
               </div>
             </div>
+            <div class="col-sm-12" style="text-align: center;">Winner : {{ match.winner }}</div>
             </div>
             </div>
 
