@@ -6,7 +6,7 @@ metadata:
     app: dbis-sport-master
   name: dbis-sport-master
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: dbis-sport-master
@@ -17,6 +17,8 @@ spec:
       labels:
         app: dbis-sport-master
     spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
       containers:
       - image: dbissportmaster.azurecr.io/dbis-sport-master:latest
         name: dbis-sport-master
@@ -24,10 +26,12 @@ spec:
         resources: {}
         ports:
           - containerPort: 4200
-status: {}
-
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -37,7 +41,6 @@ metadata:
 spec:
   ports:
   - port: 4200
-    protocol: TCP
   selector:
     app: dbis-sport-master
   type: LoadBalancer
