@@ -20,7 +20,7 @@ spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - image: dbissportmaster.azurecr.io/dbis-sport-master:latest
+      - image: genixterraformdockercontainerregistryversion2.azurecr.io/dbis-sport-master:latest
         name: dbis-sport-master
         imagePullPolicy: Always
         resources: {}
