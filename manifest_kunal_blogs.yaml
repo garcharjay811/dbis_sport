@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blogs
-        image: dbissportmaster.azurecr.io/blogs:latest
+        image: dbissportmaster.azurecr.io/blogsv2:latest
         ports:
         - containerPort: 80
       affinity:
