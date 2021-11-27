@@ -1,2 +1,2 @@
 const Sequelize = require('sequelize');
-module.exports = new Sequelize('postgres://postgres:jay1211@localhost:5432/sport_db', {logging: false});
+module.exports = new Sequelize('postgres://username:password@localhost:5432/db_name', {logging: false});
